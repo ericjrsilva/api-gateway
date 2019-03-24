@@ -1,4 +1,5 @@
 ## Api-gateway
+[![Build Status](https://travis-ci.org/ericjrsilva/api-gateway.svg?branch=master)](https://travis-ci.org/ericjrsilva/api-gateway)
 
 Node and Express api-gateway that integrates two different services.
 
@@ -25,5 +26,14 @@ To run it in a container (nginx plus three instances, basepath /api default port
 docker-compose up --build
 ```
 
+To use it in the cloud, use:
+```
+https://api-gateway-payment.herokuapp.com/api-docs
 
+GET https://api-gateway-payment.herokuapp.com/clients/:cid
 
+GET|POST https://api-gateway-payment.herokuapp.com/clients/:cid/transactions
+
+POST https://api-gateway-payment.herokuapp.com/clients/:cid
+
+```
