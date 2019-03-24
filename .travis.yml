@@ -8,7 +8,7 @@ before_install:
 
 script:
   - docker build -t payment/api-gateway -f Dockerfile.heroku .
-  - docker run payment/api-gateway -d
+  - docker run -d payment/api-gateway
 
 after_script:
   - docker-compose down
