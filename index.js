@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cluster = require('cluster');
 const routes = require('./routes/routes');
 require('dotenv').config();
+const config = require('./config/config');
 
 const swaggerUi = require('swagger-ui-express'),
     swaggerDocument = require('./swagger.json');
@@ -27,6 +28,6 @@ const swaggerUi = require('swagger-ui-express'),
 
 
   // app.listen(3000, () => console.log('Worker %d running!', cluster.worker.id));
-  app.listen(3000, () => console.log('Running on 3000'));
+  app.listen(config.port, () => console.log('Running on ' + config.port));
 
 // }

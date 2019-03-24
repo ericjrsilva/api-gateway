@@ -1,0 +1,7 @@
+version: '3'
+services:
+  server1:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile

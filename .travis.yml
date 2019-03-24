@@ -7,8 +7,8 @@ before_install:
   - docker-compose -f docker-compose.test.yml up
 
 script:
-  - docker-compose -f docker-compose.yml build
-  - docker-compose -f docker-compose.yml up -d
+  - docker-compose -f docker-compose.heroku.yml build
+  - docker-compose -f docker-compose.heroku.yml up -d
 
 after_script:
   - docker-compose down
