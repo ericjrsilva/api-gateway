@@ -7,8 +7,8 @@ before_install:
   - docker-compose -f docker-compose.test.yml up
 
 script:
-  - docker-compose -f docker-compose.heroku.yml build
-  - docker-compose -f docker-compose.heroku.yml up -d
+  - docker build -t payment/api-gateway -f Dockerfile.heroku .
+  - docker run payment/api-gateway
 
 after_script:
   - docker-compose down

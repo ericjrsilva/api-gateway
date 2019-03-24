@@ -1,0 +1,15 @@
+FROM node:alpine
+
+WORKDIR /usr/app
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+ENV HEROKU=true
+ENV URL_GATEWAY_1=https://gtw1.rafaelverger.com.br
+ENV URL_GATEWAY_2=https://gtw2.rafaelverger.com.br
+
+CMD ["npm", "run", "start"]
