@@ -17,6 +17,6 @@ deploy:
   provider: heroku
   api_key:
     secure: $HEROKU_API_KEY
-  app: api-gateway
+  app: api-gateway-payment
   on:
     repo: ericjrsilva/api-gateway
