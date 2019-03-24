@@ -1,0 +1,26 @@
+version: '3'
+services:
+  server1:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+  server2:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+  server3:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  nginx:
+      build: ./config/nginx
+      links:
+          - server1
+          - server2
+          - server3
+      ports:
+          - '8080:8080'

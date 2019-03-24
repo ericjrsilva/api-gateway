@@ -1,0 +1,316 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Gateway that integrates two different payment services",
+    "version": "0.0.1"
+  },
+  "basePath": "/api/v1",
+  "paths": {
+    "/clients/{CID}": {
+      "get": {
+        "description": "Returns a client based on a CID",
+        "operationId": "get_client",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "CID",
+            "in": "path",
+            "description": "CID of client",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "client response",
+            "schema": {
+              "$ref": "#/definitions/Client"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/clients": {
+      "post": {
+        "description": "Creates a new client",
+        "operationId": "create_client",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "client",
+            "in": "body",
+            "description": "Client to add on services",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewClient"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "client response",
+            "schema": {
+              "$ref": "#/definitions/NewClient"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/clients/{CID}/transactions": {
+      "get": {
+        "description": "Returns the transactions based on a CID",
+        "operationId": "get_transactions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "CID",
+            "in": "path",
+            "description": "CID of client",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "transaction response",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new transaction",
+        "operationId": "create_transaction",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "transaction",
+            "in": "body",
+            "description": "Transaction to add on services",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewTransaction"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "transaction response",
+            "schema": {
+              "$ref": "#/definitions/NewTransaction"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Client": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NewClient"
+        },
+        {
+          "required": [
+            "first_name",
+            "last_name",
+            "email",
+            "fullname"
+          ],
+          "properties": {
+            "_id": {
+              "type":"integer",
+              "format": "int64"
+            },
+            "first_name": {
+              "type": "string",
+              "format": "string"
+            },
+            "last_name": {
+              "type": "string",
+              "format": "string"
+            },
+            "email": {
+              "type": "string",
+              "format": "string"
+            },
+            "fullname": {
+              "type": "string",
+              "format": "string"
+            },
+            "createdAt": {
+              "type": "date",
+              "format": "date"
+            }            
+          }
+        }
+      ]
+    },
+    "NewClient": {
+      "type": "object",
+      "required": [
+        "first_name",
+        "last_name",
+        "email",
+        "fullname"
+      ],
+      "properties": {
+        "_id": {
+          "type":"integer",
+          "format": "int64"
+        },
+        "first_name": {
+          "type": "string",
+          "format": "string"
+        },
+        "last_name": {
+          "type": "string",
+          "format": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "string"
+        },
+        "fullname": {
+          "type": "string",
+          "format": "string"
+        },
+        "createdAt": {
+          "type": "date",
+          "format": "date"
+        }
+      }
+    },
+    "Transaction": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NewTransaction"
+        },
+        {
+          "required": [
+            "amount",
+            "creditcard",
+            "number",
+            "issuer",
+            "expire_month",
+            "expire_year",
+            "cvv"
+          ],
+          "properties": {
+            "id": {
+              "type":"integer",
+              "format": "int64"
+            },
+            "amount": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "result": {
+              "type": "boolean",
+              "format": "boolean"
+            },
+            "creditcard": {
+              "type": "object",
+              "format": "object"
+            },
+            "client_id": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      ]
+    },
+    "NewTransaction": {
+      "type": "object",
+      "allOf": [
+        {
+          "required": [
+            "amount",
+            "creditcard",
+            "number",
+            "issuer",
+            "expire_month",
+            "expire_year",
+            "cvv"
+          ],
+          "properties": {
+            "id": {
+              "type":"integer",
+              "format": "int64"
+            },
+            "amount": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "result": {
+              "type": "boolean",
+              "format": "boolean"
+            },
+            "creditcard": {
+              "type": "object",
+              "format": "object"
+            },
+            "client_id": {
+              "type": "integer",
+              "format": "int64"
+            }            
+          }
+        }
+      ]
+    },
+    "ErrorModel": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
