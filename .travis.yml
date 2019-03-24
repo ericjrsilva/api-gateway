@@ -7,7 +7,7 @@ before_install:
   - docker-compose -f docker-compose.test.yml up
 
 script:
-  - docker build -t payment/api-gateway -f Dockerfile.heroku .
+  - docker build -t payment/api-gateway -f Dockerfile .
   - docker run -d payment/api-gateway
 
 after_script:

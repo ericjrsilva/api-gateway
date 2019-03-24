@@ -1,15 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cluster = require('cluster');
-const routes = require('./routes/routes');
-const config = require('./config/config');
-
-const swaggerUi = require('swagger-ui-express'),
-swaggerDocument = require('./swagger.json');
 
 if(!process.env.HEROKU) {
   require('dotenv').config();
 }
+
+const config = require('./config/config');
+const routes = require('./routes/routes');
+
+const swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./swagger.json');
 
           
 const app = express();
