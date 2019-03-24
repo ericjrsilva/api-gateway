@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker-compose -f docker-compose.test.yml build
+  - docker-compose -f docker-compose.test.yml up
+
+script:
+  - docker-compose -f docker-compose.yml build
+  - docker-compose -f docker-compose.yml up
+
+after_script:
+  - docker-compose down
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: $HEROKU_API_KEY
+  app: api-gateway
+  on:
+    repo: ericjrsilva/api-gateway
